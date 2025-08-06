@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    // We don't want to transform TypeScript to JavaScript
+    // but only check the TypeScript.
+    //
+    "noEmit": true,
+
+    // Allow the fetch function and other browser side stuff.
+    // It's important because Bun.js use some of the browser API.
+    //
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    // For React component support.
+    "jsx": "react",
+
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    // Allow thing like "import "./myFile"
+    // where we don't put the .ts at the end of the file name.
+    // Bun don't require it, but Typescript checker need this option.
+    //
+    "rewriteRelativeImportExtensions": true,
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+
+  // Make it way faster!
+  "exclude": [
+    "node_modules"
+  ]
+}

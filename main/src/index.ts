@@ -26,18 +26,31 @@ export interface ListParams {
 }
 
 export interface QueryParams {
-  limit?: number;
-  skip?: number;
-  descending?: boolean;
+    limit?: number;
+    skip?: number;
+    descending?: boolean;
 
-  key?: any;
-  keys?: any[];
+    key?: any;
+    keys?: any[];
 
-  start_key?: any;
-  end_key?: any;
+    start_key?: any;
+    end_key?: any;
 
-  include_docs?: boolean;
-  sorted?: boolean;
+    include_docs?: boolean;
+    sorted?: boolean;
+
+    /**
+     * Returns the "reduce" value.
+     * Is generally used with "group=true".
+     */
+    reduce?: boolean;
+
+    /**
+     * Is used with "reduce" value.
+     * If true: do the reduction for each key.
+     * If false: do the reduction for all documents, without regrouping by key.
+     */
+    group?: boolean;
 }
 
 export interface DocumentRef {

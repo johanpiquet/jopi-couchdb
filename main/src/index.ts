@@ -1,7 +1,8 @@
 // noinspection JSUnusedGlobalSymbols
 
 import "jopi-node-space";
-import {tick} from "../../../../dev_JopiCrawler/_packages/jopi-crawler";
+
+const tick = NodeSpace.timer.tick;
 
 //region Interfaces
 
@@ -119,8 +120,8 @@ export interface DesignDoc {
 }
 
 export interface CompileDesignDocParams {
-  mapViews?: {[viewName: string]: (doc:any)=>void};
-  reduceViews?: {[viewName: string]: (keys: any, values: any, rereduce: any)=>any};
+  mapViews?: {[viewName: string]: (string|((doc:any)=>void))};
+  reduceViews?: {[viewName: string]: (string|((keys: any, values: any, rereduce: any)=>any))};
 }
 
 export interface DesignDocView {
@@ -190,9 +191,10 @@ export async function doCall(self: WithUrlAndCredential, method: string, urlPath
 
   try {
     response = await fetch(self.url + urlPath, {method, body: body, headers});
-  } catch {
-    console.error("CouchDB Server not connected !");
-    throw new Error("CouchDB Server not connected !");
+  } catch(e: any) {
+      console.error(e);
+      console.error("CouchDB Server not connected !");
+      throw new Error("CouchDB Server not connected !");
   }
 
   if (!response.ok) {
@@ -296,8 +298,8 @@ export class CouchDB implements WithUrlAndCredential {
     return doCall(this, "POST", "/_compact");
   }
 
-  doCall(method: string, urlPath: string, params?: DoCallParams): Promise<unknown> {
-    return doCall(this.driver, method, this.url + urlPath, params);
+  doCall<T>(method: string, urlPath: string = "", params?: DoCallParams): Promise<T> {
+    return doCall(this, method, urlPath, params) as Promise<T>;
   }
 
   // noinspection JSUnusedGlobalSymbols
@@ -425,7 +427,7 @@ export class CouchDB implements WithUrlAndCredential {
       for (const viewName in params.mapViews) {
         if (!designDoc.views[viewName]) designDoc.views[viewName] = {};
         const f = params.mapViews[viewName];
-        designDoc.views[viewName].map = f.toString();
+        designDoc.views[viewName].map = f instanceof Function ? f.toString() : f;
       }
     }
 
@@ -435,7 +437,7 @@ export class CouchDB implements WithUrlAndCredential {
         for (const viewName in params.reduceViews) {
             if (!designDoc.views[viewName]) designDoc.views[viewName] = {};
             const f = params.reduceViews[viewName];
-            designDoc.views[viewName].reduce = f.toString();
+            designDoc.views[viewName].reduce = f instanceof Function ? f.toString() : f;
         }
     }
 

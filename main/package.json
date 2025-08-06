@@ -10,6 +10,6 @@
     "@types/bun": "^1.2.19"
   },
   "dependencies": {
-    "jopi-node-space": "latest"
+    "jopi-node-space": "workspace:*"
   }
 }

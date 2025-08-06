@@ -42,6 +42,7 @@ export interface QueryParams {
     /**
      * Returns the "reduce" value.
      * Is generally used with "group=true".
+     * Default is false.
      */
     reduce?: boolean;
 
@@ -462,19 +463,23 @@ export class CouchDB implements WithUrlAndCredential {
    * See: http://127.0.0.1:5984/_utils/docs/api/ddoc/views.html#db-design-ddoc-view-view
    */
   queryView(designDocName: string, viewName: string, params?: QueryParams): Promise<RequestViewResponse> {
-    let newParams: any = undefined;
+    let newParams: any = {};
 
     if (params) {
-      newParams = {};
+        for (const [k, v] of Object.entries(params)) {
+            if (v != undefined) newParams[k] = v;
+        }
+        if (params.key) newParams.key = JSON.stringify(params.key);
+        if (params.keys) newParams.keys = JSON.stringify(params.keys);
+        if (params.start_key) newParams.start_key = JSON.stringify(params.start_key);
+        if (params.end_key) newParams.end_key = JSON.stringify(params.end_key);
 
-      for (const [k,v] of Object.entries(params)) {
-        if (v!=undefined) newParams[k] = v;
-      }
-
-      if (params.key) newParams.key = JSON.stringify(params.key);
-      if (params.keys) newParams.keys = JSON.stringify(params.keys);
-      if (params.start_key) newParams.start_key = JSON.stringify(params.start_key);
-      if (params.end_key) newParams.end_key = JSON.stringify(params.end_key);
+        // Avoid difficulties if there is a reduce function
+        // since "reduce=true" is the CouchDB default if there is a reducer.
+        if (params.reduce===undefined) newParams.reduce = false;
+    }
+    else {
+        newParams.reduce = false;
     }
 
     return doCall(this, "GET", `/_design/${designDocName}/_view/${viewName}`, {params: newParams}) as Promise<RequestViewResponse>;
@@ -495,3 +500,9 @@ export function isConflictError(error: any): boolean {
 export function isNotFoundError(error: any) {
   return error.status===404;
 }
+
+/**
+ * The last character of the Unicode range.
+ * Allow limiting keys.
+ */
+export const UNICODE_END = "\ufff0";

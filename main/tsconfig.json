@@ -19,7 +19,7 @@
 
     // Allow thing like "import "./myFile"
     // where we don't put the .ts at the end of the file name.
-    // Bun don't require it, but Typescript checker need this option.
+    // Bun doesn't require it, but TypeScript checker needs this option.
     //
     "rewriteRelativeImportExtensions": true,
 

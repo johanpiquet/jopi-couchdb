@@ -1,33 +1,15 @@
 {
-  "version": "0.0.1",
-  "private": false,
-  "name": "jopi-node-switch",
-  "license": "MIT",
-  "homepage": "https://github.com/johanpiquet/jopi-node-switch",
+  "name": "jopi-couchdb",
+  "private": "true",
   "keywords": [],
-  "author": "Johan PIQUET",
-  "description": "Switch from javascript to typescript for node packages.",
-  "type": "module",
-
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-
+  "engines": {
+    "bun": "^1.2.18"
+  },
+  "main": "src/index.ts",
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "latest",
-    "@types/mime-types": "latest"
+    "@types/bun": "^1.2.19"
   },
-
-  "scripts": {
-    "tsc": "tsc",
-    "bun-install": "bun install",
-    "npm-publish": "npm publish",
-
-    "start": "node dist/index.js"
-  },
-
-  "nodeSwitch": {
-    "node": "dist",
-    "bun": "src"
+  "dependencies": {
+    "jopi-node-space": "workspace:*"
   }
 }

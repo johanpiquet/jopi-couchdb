@@ -204,16 +204,13 @@ export async function doCall(self: WithUrlAndCredential, method: string, urlPath
   let response: Response;
 
   try {
-    response = await fetch(self.url + urlPath, {method, body: body, headers});
+    response = await fetch(self.url + urlPath, {method, body: body, headers, duplex: 'half'});
   } catch(e: any) {
-      console.error(e);
-      console.error("CouchDB Server not connected !");
+      console.error("CouchDB Server not connected !", e);
       throw new Error("CouchDB Server not connected !");
   }
 
   if (!response.ok) {
-    //if (response.status === 409) {console.log(errorStack); debugger; }
-
     throw new CouchDbError(
         `CouchDB - ${response.status} - ${response.statusText}`,
         response.status,

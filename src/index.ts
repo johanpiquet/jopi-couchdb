@@ -204,7 +204,11 @@ export async function doCall(self: WithUrlAndCredential, method: string, urlPath
   let response: Response;
 
   try {
-    response = await fetch(self.url + urlPath, {method, body: body, headers, duplex: 'half'});
+    response = await fetch(self.url + urlPath, {
+      method, body, headers,
+      //@ts-ignore Duplex
+      duplex: 'half'
+    });
   } catch(e: any) {
       console.error("CouchDB Server not connected !", e);
       throw new Error("CouchDB Server not connected !");

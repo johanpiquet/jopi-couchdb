@@ -1,8 +1,10 @@
 {
+  "version": "1.0.0",
+  "private": false,
   "name": "jopi-couchdb",
-  "private": "true",
-  "keywords": [],
-  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/johanpiquet/jopi-couchdb",
+  "keywords": ["couchdb"],
 
   "engines": {
     "bun": "^1.2.18",
@@ -17,6 +19,11 @@
 
   "dependencies": {
     "jopi-node-space": "workspace:*"
+  },
+
+  "scripts": {
+    "tsc": "tsc",
+    "npm-publish": "npm publish"
   },
 
   "nodeSwitch": {

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "name": "jopi-couchdb",
   "license": "MIT",
@@ -24,7 +24,9 @@
 
   "scripts": {
     "tsc": "tsc",
-    "bun-publish": "bun publish",
-    "bun-install": "bun install"
+    "bun-install": "bun install --registry http://localhost:4873/",
+    "bun-update": "bun update --registry http://localhost:4873/",
+
+    "npm-publish": "tsc; npm publish --registry http://localhost:4873/"
   }
 }

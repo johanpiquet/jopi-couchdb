@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "name": "jopi-couchdb",
   "license": "MIT",
@@ -14,20 +14,17 @@
   "main": "dist/index.js",
 
   "devDependencies": {
-    "@types/bun": "^1.2.19"
+    "@types/bun": "^1.2.19",
+    "typescript": "^5.9.2"
   },
 
   "dependencies": {
-    "jopi-node-space": "workspace:*"
+    "jopi-node-space": "latest"
   },
 
   "scripts": {
     "tsc": "tsc",
-    "npm-publish": "npm publish"
-  },
-
-  "nodeSwitch": {
-    "node": "dist",
-    "bun": "src"
+    "bun-publish": "bun publish",
+    "bun-install": "bun install"
   }
 }

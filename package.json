@@ -24,9 +24,6 @@
 
   "scripts": {
     "tsc": "tsc",
-    "bun-install": "bun install --registry http://localhost:4873/",
-    "bun-update": "bun update --registry http://localhost:4873/",
-
-    "npm-publish": "tsc; npm publish --registry http://localhost:4873/"
+    "bun-publish": "tsc; bun publish"
   }
 }

@@ -19,7 +19,7 @@
   },
 
   "dependencies": {
-    "jopi-node-space": "latest"
+    "jopi-node-space": "workspace:*"
   },
 
   "scripts": {

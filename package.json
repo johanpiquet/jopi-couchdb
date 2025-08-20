@@ -12,6 +12,7 @@
   },
 
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
 
   "devDependencies": {
     "@types/bun": "^1.2.19"

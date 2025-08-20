@@ -14,8 +14,7 @@
   "main": "dist/index.js",
 
   "devDependencies": {
-    "@types/bun": "^1.2.19",
-    "typescript": "^5.9.2"
+    "@types/bun": "^1.2.19"
   },
 
   "dependencies": {
@@ -23,7 +22,7 @@
   },
 
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "npx tsc",
     "bun-publish": "tsc; bun publish"
   }
 }

@@ -24,5 +24,8 @@
   "scripts": {
     "tsc": "npx tsc",
     "bun-publish": "tsc; bun publish"
-  }
+  },
+
+  "nodeSwitch": true,
+  "nodeSwitch-default": "node"
 }

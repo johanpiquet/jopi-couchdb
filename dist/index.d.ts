@@ -1,4 +1,6 @@
+// noinspection JSUnusedGlobalSymbols
 import "jopi-node-space";
+//region Interfaces
 interface WithUrlAndCredential {
     url: string;
     credentials: string;
@@ -6,6 +8,7 @@ interface WithUrlAndCredential {
 export interface IdRev {
     _id: string;
     _rev: string;
+    // Any value.
     [key: string]: any;
 }
 export interface ListParams {
@@ -55,6 +58,7 @@ export interface DocumentRef {
     value: any;
 }
 export interface NewDocument {
+    // Any value.
     [key: string]: any;
 }
 export interface Document {
@@ -62,6 +66,7 @@ export interface Document {
     _rev: string;
     _deleted?: boolean;
     _attachments?: any;
+    // Any value.
     [key: string]: any;
 }
 export interface ConfirmIdRev {
@@ -112,11 +117,13 @@ export interface DesignDocView {
     map?: string;
     reduce?: string;
 }
+//endregion
 export declare class CouchDbError extends Error {
     readonly status: number;
     readonly statusText: string;
     readonly request: string;
     readonly errorBody: string;
+    // noinspection JSUnusedGlobalSymbols
     constructor(message: string, status: number, statusText: string, request: string, errorBody: string);
 }
 export declare function doCall(self: WithUrlAndCredential, method: string, urlPath: string, params?: DoCallParams): Promise<unknown>;
@@ -125,6 +132,7 @@ export declare class CouchDriver implements WithUrlAndCredential {
     readonly credentials: string;
     constructor(url: string, login: string, password: string);
     getDb(dbName: string): CouchDB;
+    // noinspection JSUnusedGlobalSymbols
     /**
      * List all the databases.
      * See: http://127.0.0.1:5984/_utils/docs/api/server/common.html#all-dbs
@@ -142,6 +150,7 @@ export declare class CouchDriver implements WithUrlAndCredential {
      */
     deleteDb(dbName: string): Promise<boolean>;
     hasDb(dbName: string): Promise<boolean>;
+    // noinspection JSUnusedGlobalSymbols
     /**
      * Return info about this CouchDB instance.
      * See: http://127.0.0.1:5984/_utils/docs/api/server/common.html#api-server-root
@@ -160,12 +169,15 @@ export declare class CouchDB implements WithUrlAndCredential {
      */
     compact(): Promise<unknown>;
     doCall<T>(method: string, urlPath?: string, params?: DoCallParams): Promise<T>;
+    // noinspection JSUnusedGlobalSymbols
     all_docs(params?: ListParams): Promise<RequestViewResponse>;
+    // noinspection JSUnusedGlobalSymbols
     /**
      * Get a document.
      * See: http://127.0.0.1:5984/_utils/docs/api/document/common.html#get--db-docid
      */
     loadDoc(docId: string, params?: LoadDocParams): Promise<Document | undefined>;
+    // noinspection JSUnusedGlobalSymbols
     /**
      * Create or update a document a new document.
      * See : http://127.0.0.1:5984/_utils/docs/api/document/common.html#put--db-docid

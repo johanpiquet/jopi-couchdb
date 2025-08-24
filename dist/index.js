@@ -3,6 +3,10 @@ import "jopi-node-space";
 const tick = NodeSpace.timer.tick;
 //endregion
 export class CouchDbError extends Error {
+    status;
+    statusText;
+    request;
+    errorBody;
     // noinspection JSUnusedGlobalSymbols
     constructor(message, status, statusText, request, errorBody) {
         super(message);
@@ -66,6 +70,8 @@ export async function doCall(self, method, urlPath, params) {
     return response.json();
 }
 export class CouchDriver {
+    url;
+    credentials;
     constructor(url, login, password) {
         this.url = url;
         this.credentials = "Basic " + btoa(`${login}:${password}`);
@@ -128,6 +134,10 @@ export class CouchDriver {
     }
 }
 export class CouchDB {
+    driver;
+    dbName;
+    credentials;
+    url;
     constructor(driver, dbName, url, credentials) {
         this.driver = driver;
         this.dbName = dbName;
